@@ -16,6 +16,7 @@ void onStart() // called at the start of the program
 {
 	nodelay(stdscr, true);
 	curs_set(0);
+	noecho();
 }
 
 void onFrame() // called every "frame", which is 1/targetFPS (0.1) seconds
