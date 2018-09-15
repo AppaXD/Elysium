@@ -51,8 +51,8 @@ namespace Elysium
 		static rgb Magenta(255, 0, 255);
 	}
 
-	void init(unsigned short targetFPS, void (*onFrame)(), bool delay);
-	void init(unsigned short targetFPS, void(*onFrame)(), void (*update)(), bool delay);
+	void init(unsigned short targetFPS, void (*onFrame)());
+	void init(unsigned short targetFPS, void(*onFrame)(), void (*onStart)());
 	void print(std::string contents, int x, int y);
 	void print(std::string contents, rgb fgColour, int x, int y);
 	void print(std::string contents, rgb fgColour, rgb bgColour, int x, int y);

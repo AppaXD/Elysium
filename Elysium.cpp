@@ -2,15 +2,13 @@
 #include <chrono>
 #include <iostream>
 
-void Elysium::init(unsigned short targetFPS, void(*onFrame)(), bool delay)
+void Elysium::init(unsigned short targetFPS, void(*onFrame)())
 {
 	float frametime = 1.f / targetFPS;
 
 	initscr();
 	start_color();
 	move(0, 0);
-
-	nodelay(stdscr, delay);
 
 	std::chrono::steady_clock::time_point start = std::chrono::high_resolution_clock::now();
 
@@ -29,7 +27,7 @@ void Elysium::init(unsigned short targetFPS, void(*onFrame)(), bool delay)
 	}
 }
 
-void Elysium::init(unsigned short targetFPS, void(*onFrame)(), void(*update)(), bool delay)
+void Elysium::init(unsigned short targetFPS, void(*onFrame)(), void(*onStart)())
 {
 	float frametime = 1.f / targetFPS;
 
@@ -37,7 +35,7 @@ void Elysium::init(unsigned short targetFPS, void(*onFrame)(), void(*update)(), 
 	start_color();
 	move(0, 0);
 
-	nodelay(stdscr, delay);
+	onStart();
 
 	std::chrono::steady_clock::time_point start = std::chrono::high_resolution_clock::now();
 
@@ -45,8 +43,6 @@ void Elysium::init(unsigned short targetFPS, void(*onFrame)(), void(*update)(), 
 	{
 		std::chrono::steady_clock::time_point end = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> diff = end - start;
-
-		update();
 
 		if (diff.count() >= frametime)
 		{
